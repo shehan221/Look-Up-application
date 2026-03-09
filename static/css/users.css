@@ -1,0 +1,211 @@
+/* =====================================================
+   ⭐ USERS PAGE LAYOUT
+===================================================== */
+
+body{
+    background:#020617;
+    color:#e2e8f0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    overflow:auto;
+}
+
+.container{
+    width:900px;
+    display:flex;
+    gap:40px;
+    background:#020617;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    padding:35px;
+    box-shadow:0 0 40px rgba(0,0,0,.6);
+}
+
+.form-section{ flex:1; }
+
+.subtitle{
+    color:#94a3b8;
+    margin-bottom:20px;
+}
+
+.divider{
+    width:1px;
+    background:rgba(255,255,255,.08);
+}
+
+/* =====================================================
+   ⭐ INPUTS
+===================================================== */
+
+.form-group{ margin-bottom:15px; }
+
+.form-group label{
+    font-size:13px;
+    color:#94a3b8;
+    margin-bottom:4px;
+    display:block;
+}
+
+.input-wrapper{ position:relative; }
+
+.input-icon{
+    position:absolute;
+    left:10px;
+    top:50%;
+    transform:translateY(-50%);
+    opacity:.7;
+}
+
+input{
+    width:100%;
+    padding:10px 10px 10px 35px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,.1);
+    background:#020617;
+    color:white;
+    outline:none;
+    transition:.2s;
+}
+
+input:focus{
+    border-color:#38bdf8;
+    box-shadow:0 0 0 1px #38bdf8;
+}
+
+input.error{ border-color:#ef4444; }
+input.success{ border-color:#22c55e; }
+
+/* =====================================================
+   ⭐ BUTTON
+===================================================== */
+
+.btn{
+    width:100%;
+    margin-top:10px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:linear-gradient(135deg,#7c3aed,#3b82f6);
+    color:white;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn:hover{ transform:translateY(-1px); }
+
+.back-link{ margin-top:15px; }
+
+.back-link a{
+    color:#38bdf8;
+    text-decoration:none;
+}
+
+/* =====================================================
+   ⭐ PASSWORD STRENGTH
+===================================================== */
+
+.password-strength{
+    height:5px;
+    background:#1e293b;
+    border-radius:5px;
+    margin-top:6px;
+    overflow:hidden;
+}
+
+.strength-text{
+    font-size:12px;
+    margin-top:3px;
+    color:#94a3b8;
+}
+
+/* =====================================================
+   ⭐ MODERN MESSAGE BOX (FIXED)
+===================================================== */
+
+.message{
+    display:none;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:15px;
+    padding:12px 14px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:500;
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.08);
+    background:rgba(15,23,42,.6);
+    animation:fadeIn .25s ease;
+}
+
+.message.show{
+    display:flex;
+}
+
+.message.success{
+    color:#22c55e;
+    border-color:rgba(34,197,94,.3);
+    box-shadow:0 0 12px rgba(34,197,94,.15);
+}
+
+.message.error{
+    color:#ef4444;
+    border-color:rgba(239,68,68,.3);
+    box-shadow:0 0 12px rgba(239,68,68,.15);
+}
+
+/* ⭐ CLOSE BUTTON FIX */
+.close-btn{
+    background:rgba(255,255,255,.08);
+    border:none;
+    color:#e2e8f0;
+    width:24px;
+    height:24px;
+    border-radius:6px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.close-btn:hover{
+    background:#ef4444;
+    color:white;
+}
+
+@keyframes fadeIn{
+    from{ opacity:0; transform:translateY(-6px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+/* =====================================================
+   ⭐ LOADING OVERLAY
+===================================================== */
+
+.loading-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(2,6,23,.7);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.loading-overlay.active{
+    display:flex;
+}
+
+.spinner{
+    width:40px;
+    height:40px;
+    border:4px solid rgba(255,255,255,.2);
+    border-top:4px solid #38bdf8;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    to{ transform:rotate(360deg); }
+}

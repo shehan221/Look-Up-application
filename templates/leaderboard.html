@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LOOK-UP | Leaderboard</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/leaderboard.css') }}">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ════════════════════════════════════════════ -->
+<nav class="navbar">
+  <div class="nav-logo">🌍 LOOK-UP</div>
+  <button class="back-btn" onclick="goBack()">← Back</button>
+  <span class="navbar-title">Community Leaderboard</span>
+  <div class="navbar-spacer"></div>
+  <span class="trophy-badge">🏆</span>
+</nav>
+
+<!-- ═══ CONTENT ══════════════════════════════════════════ -->
+<div class="leaderboard-wrapper">
+
+  <div class="lb-header">
+    <h1>🏆 Top Rated Hotels</h1>
+    <p>Ranked by the LOOK-UP community — real reviews, real experiences.</p>
+  </div>
+
+  <div id="leaderboardList">
+    <!-- Populated by leaderboard.js -->
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/leaderboard.js') }}"></script>
+</body>
+</html>

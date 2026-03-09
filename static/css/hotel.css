@@ -1,0 +1,106 @@
+/* ============================================================
+   hotel.css  —  Hotel SVG pin markers + popup cards
+============================================================ */
+
+/* ── Reset Leaflet default on our pins ───────────────────── */
+.hotel-pin-icon {
+  background: none !important;
+  border: none !important;
+}
+
+.hotel-pin-icon svg {
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.5));
+  transition: transform .18s ease, filter .18s ease;
+  display: block;
+}
+
+.hotel-pin-icon:hover svg {
+  transform: translateY(-4px) scale(1.12);
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6));
+}
+
+/* ── Leaflet popup shell ─────────────────────────────────── */
+.hotel-popup-wrap .leaflet-popup-content-wrapper {
+  background: linear-gradient(160deg, #0d1f38 0%, #060f22 100%) !important;
+  border: 1px solid rgba(14,165,190,0.25) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.06) !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.hotel-popup-wrap .leaflet-popup-content {
+  margin: 0 !important;
+  width: auto !important;
+}
+
+.hotel-popup-wrap .leaflet-popup-tip {
+  background: #0d1f38 !important;
+}
+
+.hotel-popup-wrap .leaflet-popup-close-button {
+  color: rgba(255,255,255,0.3) !important;
+  font-size: 18px !important;
+  top: 8px !important;
+  right: 10px !important;
+}
+.hotel-popup-wrap .leaflet-popup-close-button:hover {
+  color: #fff !important;
+}
+
+/* ── Popup card ──────────────────────────────────────────── */
+.hotel-popup {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  padding: 16px 18px 14px;
+  min-width: 200px;
+}
+
+/* Type badge */
+.hotel-popup-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid;
+  margin-bottom: 8px;
+}
+
+/* Hotel name */
+.hotel-popup-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+/* Divider */
+.hotel-popup-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  margin-bottom: 10px;
+}
+
+/* Distance row */
+.hotel-popup-dist {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: #8baabe;
+  font-weight: 500;
+}
+
+.hotel-popup-dist svg {
+  flex-shrink: 0;
+}
+
+.hotel-popup-dist span {
+  color: #e8f0fe;
+}

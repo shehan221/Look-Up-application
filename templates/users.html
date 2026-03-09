@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LookUp - Login & Register</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/users.css') }}">
+
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="container">
+        <!-- LOGIN SECTION -->
+        <div class="form-section">
+            <h2>🔐 Login</h2>
+            <p class="subtitle">Welcome back! Please login to your account.</p>
+            
+            <div id="loginMessage" class="message"></div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="login_username">Username or Email</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" id="login_username" name="username_or_email" 
+                               placeholder="Enter your username or email" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login_password">Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="login_password" name="password" 
+                               placeholder="Enter your password" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn" id="loginBtn">
+                    <span class="btn-text">Login</span>
+                </button>
+            </form>
+            
+            <div class="back-link">
+                <a href="/">← Back to Home</a>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- REGISTER SECTION -->
+        <div class="form-section">
+            <h2>📝 Register</h2>
+            <p class="subtitle">Create a new account to get started.</p>
+            
+            <div id="registerMessage" class="message"></div>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="register_username">Username</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" id="register_username" name="username" 
+                               placeholder="Choose a username" required minlength="3">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register_fullname">Full Name</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">✏️</span>
+                        <input type="text" id="register_fullname" name="full_name" 
+                               placeholder="Enter your full name" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register_email">Email</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📧</span>
+                        <input type="email" id="register_email" name="email" 
+                               placeholder="Enter your email address" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register_password">Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="register_password" name="password" 
+                               placeholder="Create a strong password" required minlength="6">
+                    </div>
+                    <div class="password-strength" id="passwordStrength">
+                        <div class="password-strength-bar"></div>
+                    </div>
+                    <div class="strength-text" id="strengthText"></div>
+                </div>
+                
+                <button type="submit" class="btn" id="registerBtn">
+                    <span class="btn-text">Register</span>
+                </button>
+            </form>
+            
+            <div class="back-link">
+                <a href="/">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+   <script src="{{ url_for('static', filename='js/users.js') }}"></script>
+</body>
+</html>

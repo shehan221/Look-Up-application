@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LOOK-UP | AI Travel Assistant</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/hotels.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reviews.css') }}">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+</head>
+
+<body
+  data-just-logged-in="{{ just_logged_in | tojson }}"
+  data-is-logged-in="{{ 'true' if username else 'false' }}">
+
+<!-- ═══ TOP NAVIGATION BAR ═══════════════════════════════ -->
+<nav class="navbar">
+  <div class="nav-logo">🌍 LOOK-UP</div>
+
+  <div id="navLinks" class="nav-links">
+    <button class="nav-btn active" data-target="homeSection">🏠 Home</button>
+    <button class="nav-btn" data-target="exploreSection">💬 Chat</button>
+    <button class="nav-btn" data-target="mapSection">🗺 Map</button>
+    <button class="nav-btn" data-target="reviewsPanel" onclick="openReviews()">⭐ Reviews</button>
+    <button class="nav-btn" onclick="goLeaderboard()">🏆 Leaderboard</button>
+  </div>
+
+  <div class="nav-right">
+    {% if username %}
+    <div class="profile-wrapper">
+      <div class="icon-btn user-icon logged-in" onclick="toggleProfileMenu()">👤</div>
+      <div id="profileMenu" class="profile-menu">
+        <div class="profile-name">👤 {{ username }}</div>
+        <button onclick="logoutUser()" class="profile-btn">🚪 Logout</button>
+      </div>
+    </div>
+    {% else %}
+    <div class="icon-btn user-icon" onclick="openUserPanel()">👤</div>
+    {% endif %}
+
+    <div class="icon-btn admin-icon" onclick="openAdminPanel()">🛠</div>
+  </div>
+</nav>
+
+<!-- ═══ MAIN CONTENT ══════════════════════════════════════ -->
+<div class="content">
+  <div class="section-gap">
+
+    <!-- HOME / HERO -->
+    <section id="homeSection">
+      <h1 class="hero-headline">AI Travel Recognition</h1>
+      <p class="hero-sub">Upload a travel photo and let LOOK-UP identify your location instantly.</p>
+
+      <div class="hero-card">
+        <img id="previewImage" class="hero-image" hidden>
+
+        <div class="image-action-bar">
+          <label class="btn upload-btn">
+            📷 Upload Image
+            <input type="file" id="imageInput" hidden>
+          </label>
+          <button class="btn primary-btn" onclick="analyzeImage()">✦ Analyze</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPLORE / CHAT -->
+    <section id="exploreSection" class="explore-canvas">
+      <aside class="places-panel">
+        <h3>Places to Explore</h3>
+        <ul id="recommendationsList" class="place-list"></ul>
+      </aside>
+
+      <div class="conversation-panel">
+        <div class="location-header">
+          <h2>Location: <span id="locationName">—</span></h2>
+          <div class="chat-actions">
+            <span id="confidenceText" class="confidence-pill"></span>
+            <button class="clear-btn" onclick="clearChat()">Clear</button>
+          </div>
+        </div>
+
+        <div id="chatMessages" class="chat-feed">
+          <div class="bot-msg">Upload an image to begin exploring.</div>
+        </div>
+
+        <div class="chat-input-row">
+          <input id="chatInput" placeholder="Ask about this place…">
+          <button class="btn primary-btn" onclick="sendChat()">➤</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section id="mapSection">
+      <div class="map-header">
+        <h3>🗺 Map View</h3>
+        <div>
+          <button class="btn upload-btn" onclick="toggleHotels()">Hotels</button>
+          <button class="clear-btn" onclick="resetMap()">Reset</button>
+        </div>
+      </div>
+      <div id="map"></div>
+    </section>
+
+    <!-- REVIEWS -->
+    <div id="reviewsPanel" style="display:none;">
+      {% include "reviews.html" %}
+    </div>
+
+  </div><!-- .section-gap -->
+</div><!-- .content -->
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="{{ url_for('static', filename='js/reviews.js') }}"></script>
+<script src="{{ url_for('static', filename='js/hotels.js') }}"></script>
+
+<!-- Nav indicator script (top bar version) -->
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  const navBtns = document.querySelectorAll(".nav-btn[data-target]");
+
+  navBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.target;
+      const el = document.getElementById(target);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      navBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+
+  // Highlight nav on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navBtns.forEach(b => {
+          b.classList.toggle("active", b.dataset.target === id);
+        });
+      }
+    });
+  }, { threshold: 0.4, rootMargin: `-${68}px 0px 0px 0px` });
+
+  ["homeSection","exploreSection","mapSection"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+});
+</script>
+
+</body>
+</html>
